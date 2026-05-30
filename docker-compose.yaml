@@ -1,0 +1,29 @@
+services:
+  qwen-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: qwen-engine-dev:cu130
+    container_name: qwen-engine
+
+    working_dir: /workspace
+
+    stdin_open: true
+    tty: true
+
+    shm_size: "8gb"
+
+    volumes:
+      - ./:/workspace
+      - ${HOME}/.cache/huggingface:/root/.cache/huggingface
+
+    environment:
+      PYTHONUNBUFFERED: "1"
+      HF_HOME: /root/.cache/huggingface
+      TRANSFORMERS_CACHE: /root/.cache/huggingface
+      TOKENIZERS_PARALLELISM: "false"
+
+    gpus: all
+
+    command: /bin/bash
