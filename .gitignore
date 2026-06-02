@@ -1,2 +1,4 @@
 tmp/
 .devcontainer/
+.cache/
+__pycache__/
